@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Juízo e a Revelação — Pr. João Alves</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cor-destaque: #e8d9b0;
+  --cor-texto: #d8cba8;
+  --cor-secundario: #b8a878;
+  --fundo: #0a1628;
+  --fundo-card: rgba(180,140,60,0.07);
+  --fundo-card-hover: rgba(180,140,60,0.14);
+  --borda: rgba(180,140,60,0.22);
+  --borda-forte: rgba(180,140,60,0.55);
+  --dourado: #c8a84a;
+  --dourado-claro: #e0c06a;
+  --creme: #0d1e38;
+  --nav-bg: rgba(10,22,40,0.96);
+  --sombra: 0 4px 24px rgba(0,0,0,0.40);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: clamp(1.45rem, 1.9vw, 1.7rem); }
+
+body {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  font-family: 'EB Garamond', serif;
+  background: var(--fundo);
+  color: var(--cor-texto);
+  line-height: 1.82;
+}
+
+/* PROGRESS BAR */
+#progressBar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--dourado), var(--dourado-claro));
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* NAV */
+#mainNav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--borda);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  padding: 0 1.2rem;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 0.2rem;
+  height: 52px;
+}
+#mainNav::-webkit-scrollbar { display: none; }
+.nav-btn {
+  white-space: nowrap;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--cor-secundario);
+  padding: 0.35rem 0.75rem;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+.nav-btn:hover { color: var(--dourado-claro); border-color: var(--borda); }
+.nav-btn.ativo { color: var(--cor-destaque); border-color: var(--dourado); background: rgba(200,168,74,0.12); }
+.nav-btn.nav-indice {
+  color: var(--dourado);
+  border-color: var(--dourado);
+  background: rgba(200,168,74,0.10);
+  font-weight: 600;
+}
+.nav-btn.nav-indice:hover { background: rgba(200,168,74,0.20); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(200,168,74,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(30,60,120,0.15) 0%, transparent 60%),
+    linear-gradient(175deg, #0a1628 0%, #0d1e38 50%, #081220 100%);
+  overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 60px,
+    rgba(180,140,60,0.015) 60px,
+    rgba(180,140,60,0.015) 61px
+  );
+  pointer-events: none;
+}
+
+.hero-simbolo {
+  font-size: clamp(4rem, 10vw, 7rem);
+  animation: flutuar 5s ease-in-out infinite;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 30px rgba(200,168,74,0.3));
+}
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.hero-categoria {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  margin-bottom: 1.2rem;
+}
+
+.hero-titulo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.8rem, 5vw, 3.8rem);
+  color: var(--cor-destaque);
+  line-height: 1.22;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 2px 30px rgba(200,168,74,0.2);
+}
+
+.hero-subtitulo {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  color: var(--cor-secundario);
+  max-width: 680px;
+  margin-bottom: 1.6rem;
+}
+
+.hero-autor {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: var(--dourado);
+  font-weight: 500;
+}
+
+.hero-seta {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  animation: setaAnim 2.2s ease-in-out infinite;
+  cursor: pointer;
+  color: var(--dourado);
+  font-size: 1.6rem;
+}
+@keyframes setaAnim {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) scaleY(1); }
+  50% { opacity: 0.9; transform: translateX(-50%) scaleY(1.15); }
+}
+
+/* SEÇÕES */
+.section {
+  padding: 4rem 2rem;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.visivel { opacity: 1; transform: translateY(0); }
+
+/* ÍNDICE */
+#indice {
+  background: linear-gradient(180deg, transparent, rgba(200,168,74,0.03), transparent);
+}
+.indice-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.indice-btn {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.4rem;
+  background: var(--fundo-card);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s;
+  font-family: 'Cinzel', serif;
+  color: var(--cor-destaque);
+  font-size: 1.05rem;
+}
+.indice-btn:hover {
+  border-color: var(--dourado);
+  color: var(--dourado-claro);
+  background: var(--fundo-card-hover);
+  transform: translateX(4px);
+}
+.indice-romano {
+  font-family: 'Cinzel Decorative', serif;
+  color: var(--dourado);
+  font-size: 0.85rem;
+  min-width: 2.4rem;
+  font-weight: 700;
+}
+
+/* BADGE */
+.badge {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  border: 1px solid var(--borda-forte);
+  border-radius: 20px;
+  padding: 0.25rem 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+/* TÍTULOS DE SEÇÃO */
+.section-titulo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  color: var(--cor-destaque);
+  line-height: 1.3;
+  margin-bottom: 0.6rem;
+}
+.section-linha {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--dourado), transparent);
+  margin-bottom: 2rem;
+}
+
+/* CITAÇÃO */
+.citacao {
+  background: rgba(200,168,74,0.10);
+  border-left: 4px solid var(--dourado);
+  border-radius: 0 8px 8px 0;
+  padding: 1.4rem 1.6rem 1.4rem 2.2rem;
+  position: relative;
+  margin: 1.6rem 0;
+}
+.citacao::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.4rem;
+  left: 0.6rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 4rem;
+  color: var(--dourado);
+  opacity: 0.35;
+  line-height: 1;
+}
+.citacao p {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.42rem;
+  color: var(--cor-destaque);
+  line-height: 1.72;
+}
+.citacao-ref {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--dourado);
+  margin-top: 0.6rem;
+}
+
+/* DESTAQUE BÍBLICO */
+.destaque-biblico {
+  background: rgba(200,168,74,0.10);
+  border: 1px solid rgba(200,168,74,0.25);
+  border-left: 4px solid var(--dourado);
+  border-radius: 0 12px 12px 0;
+  padding: 1.6rem 2rem;
+  margin: 2rem auto;
+  max-width: 100%;
+  text-align: center;
+}
+.destaque-biblico p {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.2vw, 1.48rem);
+  color: var(--cor-destaque);
+  line-height: 1.68;
+  margin-bottom: 0.5rem;
+}
+.destaque-biblico .ref {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 0.97rem;
+  color: var(--dourado);
+}
+
+/* CARDS GRID */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.card {
+  background: var(--fundo-card);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 1.4rem 1.6rem;
+  transition: all 0.25s;
+}
+.card:hover {
+  border-color: var(--dourado);
+  background: var(--fundo-card-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--sombra);
+}
+.card-icone { font-size: 1.8rem; margin-bottom: 0.8rem; }
+.card-titulo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--cor-destaque);
+  margin-bottom: 0.6rem;
+}
+.card-texto {
+  color: var(--cor-texto);
+  font-weight: 500;
+  font-size: 1em;
+  line-height: 1.75;
+}
+
+/* ACORDEÃO */
+.acordeao {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.acord-item {
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.acord-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.3rem;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  color: var(--cor-destaque);
+  background: var(--fundo-card);
+  transition: background 0.2s;
+}
+.acord-header:hover { background: var(--fundo-card-hover); }
+.acord-seta {
+  color: var(--dourado);
+  font-size: 1.1rem;
+  transition: transform 0.3s;
+}
+.acord-item.aberto .acord-seta { transform: rotate(180deg); }
+.acord-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.acord-body-inner {
+  padding: 1.2rem 1.4rem;
+  color: var(--cor-texto);
+  font-weight: 500;
+  font-size: 1em;
+  line-height: 1.82;
+}
+
+/* PASSOS NUMERADOS */
+.passos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-top: 1.5rem;
+}
+.passo {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.passo.visivel { opacity: 1; transform: translateX(0); }
+.passo-num {
+  min-width: 2.4rem;
+  height: 2.4rem;
+  border: 2px solid var(--dourado);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--dourado);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+.passo-titulo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--cor-destaque);
+  margin-bottom: 0.4rem;
+}
+.passo-texto {
+  color: var(--cor-texto);
+  font-weight: 500;
+  font-size: 1em;
+  line-height: 1.75;
+}
+
+/* IMPLICAÇÕES */
+.implicacoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+.implicacao {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  border-left: 2px solid var(--dourado);
+  background: var(--fundo-card);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.3rem;
+}
+.impl-ponto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dourado);
+  box-shadow: 0 0 8px rgba(200,168,74,0.4);
+  flex-shrink: 0;
+  margin-top: 0.45rem;
+}
+.impl-titulo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cor-destaque);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.impl-texto {
+  color: var(--cor-texto);
+  font-weight: 500;
+  font-size: 1em;
+  line-height: 1.75;
+}
+
+/* TABELA */
+.tabela-wrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--borda);
+  margin-top: 1.5rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+}
+thead { background: rgba(200,168,74,0.10); }
+th {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  color: var(--dourado);
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+}
+td {
+  padding: 0.85rem 1.1rem;
+  color: var(--cor-texto);
+  font-weight: 500;
+  font-size: 0.97em;
+  border-top: 1px solid var(--borda);
+}
+tr:hover td { background: var(--fundo-card); }
+
+/* TAGS */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+.tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--cor-destaque);
+  border: 1px solid var(--borda-forte);
+  background: var(--fundo-card);
+  border-radius: 4px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--dourado); color: var(--dourado); }
+.tag.flash { background: rgba(200,168,74,0.25); border-color: var(--dourado-claro); }
+.tooltip {
+  position: fixed;
+  background: #0d1e38;
+  border: 1px solid var(--borda-forte);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: var(--cor-texto);
+  max-width: 260px;
+  z-index: 5000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  line-height: 1.5;
+}
+.tooltip.visivel { opacity: 1; }
+
+/* DIVISOR */
+.divisor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 2rem;
+  opacity: 0.6;
+}
+.divisor::before, .divisor::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--borda);
+}
+.divisor-glifo {
+  font-family: 'Cinzel', serif;
+  color: var(--dourado);
+  font-size: 0.9rem;
+}
+
+/* RODAPÉ */
+footer {
+  background: var(--creme);
+  border-top: 1px solid var(--borda);
+  padding: 3rem 2rem 2.5rem;
+  text-align: center;
+}
+.footer-simbolo { font-size: 2.5rem; margin-bottom: 0.8rem; }
+.footer-nome {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  color: var(--cor-destaque);
+  margin-bottom: 0.4rem;
+}
+.footer-local {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: var(--dourado);
+  margin-bottom: 0.4rem;
+}
+.footer-site a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.92rem;
+  color: var(--dourado);
+  text-decoration: none;
+  border-bottom: 1px solid var(--borda-forte);
+}
+.footer-nota {
+  font-style: italic;
+  color: var(--cor-secundario);
+  font-weight: 500;
+  font-size: 1.1em;
+  margin-top: 1.2rem;
+}
+
+/* BACK TO TOP */
+#backTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--dourado);
+  color: #0a1628;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s;
+  z-index: 999;
+  font-weight: 700;
+}
+#backTop.visivel { opacity: 1; transform: scale(1); }
+#backTop:hover { transform: scale(1.1); background: var(--dourado-claro); }
+
+/* PARÁGRAFOS E TEXTO GERAL */
+p { color: var(--cor-texto); font-weight: 500; line-height: 1.82; margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+
+@media (max-width: 600px) {
+  .section { padding: 3rem 1.2rem; }
+  #hero { padding: 3rem 1.2rem 5rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="progressBar"></div>
+
+<div id="tooltip" class="tooltip"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <button class="nav-btn nav-indice" onclick="irPara('indice')">⊞ Índice</button>
+  <button class="nav-btn" data-nav="1" onclick="irPara('tese')">A Tese</button>
+  <button class="nav-btn" data-nav="2" onclick="irPara('passagens')">Passagens</button>
+  <button class="nav-btn" data-nav="3" onclick="irPara('misericordia')">Misericórdia</button>
+  <button class="nav-btn" data-nav="4" onclick="irPara('antigo-testamento')">Ant. Testamento</button>
+  <button class="nav-btn" data-nav="5" onclick="irPara('revelacao')">Revelação</button>
+  <button class="nav-btn" data-nav="6" onclick="irPara('equidade')">Equidade</button>
+  <button class="nav-btn" data-nav="7" onclick="irPara('conclusao')">Conclusão</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-simbolo">⚖️</div>
+  <div class="hero-categoria">Teologia · Escatologia · Juízo Final</div>
+  <h1 class="hero-titulo">O Juízo e a<br>Revelação</h1>
+  <p class="hero-subtitulo">Seremos julgados de acordo com a oportunidade que tivemos de conhecer a Deus e o que fizemos com esse conhecimento</p>
+  <div class="hero-autor">Pr. João Alves</div>
+  <div class="hero-seta" onclick="irPara('indice')">↓</div>
+</section>
+
+<!-- ÍNDICE -->
+<section class="section" id="indice" data-nav="0">
+  <div class="badge">Sumário</div>
+  <h2 class="section-titulo">Índice</h2>
+  <div class="section-linha"></div>
+  <div class="indice-grid">
+    <button class="indice-btn" onclick="irPara('tese')"><span class="indice-romano">I</span> A Tese Central — Juízo Proporcional à Luz Recebida</button>
+    <button class="indice-btn" onclick="irPara('passagens')"><span class="indice-romano">II</span> Passagens Bíblicas — Apoio e Nuances</button>
+    <button class="indice-btn" onclick="irPara('misericordia')"><span class="indice-romano">III</span> Misericórdia Divina e o Caráter de Deus</button>
+    <button class="indice-btn" onclick="irPara('antigo-testamento')"><span class="indice-romano">IV</span> O Antigo Testamento e a Fé Disponível</button>
+    <button class="indice-btn" onclick="irPara('revelacao')"><span class="indice-romano">V</span> Revelação, Hermenêutica e Humildade</button>
+    <button class="indice-btn" onclick="irPara('equidade')"><span class="indice-romano">VI</span> A Equidade de Deus — O Argumento da Justiça Real</button>
+    <button class="indice-btn" onclick="irPara('conclusao')"><span class="indice-romano">VII</span> Conclusão — A Tese Reafirmada</button>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- SEÇÃO I: A TESE -->
+<section class="section" id="tese" data-nav="1">
+  <div class="badge">Seção I</div>
+  <h2 class="section-titulo">A Tese Central</h2>
+  <div class="section-linha"></div>
+
+  <p>No dia do juízo final, seremos avaliados segundo a oportunidade que tivemos de conhecer a Deus e a resposta de fé — ou rejeição — que demos a essa revelação. Não há como tratar igualmente um índio primitivo que jamais ouviu o evangelho e um cidadão urbano que viveu rodeado de testemunho cristão.</p>
+
+  <div class="destaque-biblico">
+    <p>A quem muito foi dado, muito será exigido; e a quem muito se confiou, muito mais se pedirá.</p>
+    <span class="ref">Lucas 12:48</span>
+  </div>
+
+  <p>Esta tese não relativiza a salvação nem elimina a necessidade da fé. Afirma, antes, que Deus — em sua perfeita sabedoria e misericórdia — avalia a resposta de cada pessoa à revelação que efetivamente chegou a ela. O que conta como resposta aceitável é medido pela luz disponível.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icone">🌅</div>
+      <div class="card-titulo">Revelação Proporcional</div>
+      <div class="card-texto">Deus revelou-se a cada pessoa segundo o contexto histórico, cultural e existencial em que ela nasceu. A responsabilidade cresce com a clareza da revelação recebida.</div>
+    </div>
+    <div class="card">
+      <div class="card-icone">🙏</div>
+      <div class="card-titulo">Fé como Resposta</div>
+      <div class="card-texto">Ao mencionar "o que fizemos", a tese refere-se à resposta de fé ou rejeição diante da luz disponível — não apenas a atos morais isolados.</div>
+    </div>
+    <div class="card">
+      <div class="card-icone">⚖️</div>
+      <div class="card-titulo">Justiça e Misericórdia</div>
+      <div class="card-texto">Um Deus verdadeiramente justo não pode aplicar o mesmo critério a quem nunca ouviu o nome de Cristo e a quem o rejeitou deliberadamente após plena instrução.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- SEÇÃO II: PASSAGENS -->
+<section class="section" id="passagens" data-nav="2">
+  <div class="badge">Seção II</div>
+  <h2 class="section-titulo">Passagens Bíblicas</h2>
+  <div class="section-linha"></div>
+
+  <p>A Escritura apresenta, em múltiplos textos, uma visão de julgamento que leva em conta a luz e a oportunidade recebidas por cada pessoa. Esses não são casos isolados, mas um padrão consistente ao longo dos dois Testamentos.</p>
+
+  <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; color:var(--dourado); letter-spacing:0.08em; margin: 2rem 0 1rem; text-transform:uppercase;">Textos que Apoiam a Tese</h3>
+
+  <div class="acordeao" id="acordeaoApoio">
+    <div class="acord-item">
+      <div class="acord-header" onclick="toggleAcord(this)">
+        <span>Romanos 2:12–16 — A Consciência e a Lei no Coração</span>
+        <span class="acord-seta">▾</span>
+      </div>
+      <div class="acord-body">
+        <div class="acord-body-inner">
+          <div class="citacao"><p>Pois todos os que pecaram sem a lei, sem a lei também perecerão; e todos os que pecaram com a lei, pela lei serão julgados.</p><span class="citacao-ref">Romanos 2:12</span></div>
+          Paulo articula que Deus avalia segundo a revelação recebida — lei escrita (para Israel) ou lei no coração via consciência (para os gentios). A consciência e o conhecimento moral disponível constituem o critério de avaliação. Isso apoia diretamente a ideia de que culpabilidade e responsabilidade variam conforme a luz recebida.
+        </div>
+      </div>
+    </div>
+    <div class="acord-item">
+      <div class="acord-header" onclick="toggleAcord(this)">
+        <span>Lucas 12:47–48 — Gradação Explícita de Responsabilidade</span>
+        <span class="acord-seta">▾</span>
+      </div>
+      <div class="acord-body">
+        <div class="acord-body-inner">
+          <div class="citacao"><p>Aquele servo que soube a vontade do seu senhor e não a preparou nem fez conforme a sua vontade, será castigado com muitos açoites. Mas o que não soube e fez coisas dignas de castigo, será castigado com poucos açoites.</p><span class="citacao-ref">Lucas 12:47–48</span></div>
+          Jesus estabelece explicitamente que o grau de responsabilidade está diretamente ligado ao conhecimento e à oportunidade. O servo que sabia mais recebe julgamento mais severo. Impossível ler este texto sem reconhecer uma gradação moral baseada na luz recebida.
+        </div>
+      </div>
+    </div>
+    <div class="acord-item">
+      <div class="acord-header" onclick="toggleAcord(this)">
+        <span>João 15:22–24 — Revelação e Culpabilidade</span>
+        <span class="acord-seta">▾</span>
+      </div>
+      <div class="acord-body">
+        <div class="acord-body-inner">
+          <div class="citacao"><p>Se eu não viesse e não lhes falasse, não teriam pecado; mas agora não têm desculpa pelo seu pecado.</p><span class="citacao-ref">João 15:22</span></div>
+          Jesus vincula diretamente a culpabilidade à revelação recebida. A vinda de Cristo aumentou a responsabilidade daqueles que o ouviram e rejeitaram. Isso implica que, sem tal revelação, o grau de culpa seria diferente — exatamente o que a tese defende.
+        </div>
+      </div>
+    </div>
+    <div class="acord-item">
+      <div class="acord-header" onclick="toggleAcord(this)">
+        <span>Mateus 11:20–24 — Juízo Comparativo entre Cidades</span>
+        <span class="acord-seta">▾</span>
+      </div>
+      <div class="acord-body">
+        <div class="acord-body-inner">
+          Jesus compara Corazim, Betsaida e Cafarnaum com Tiro, Sidom e até Sodoma, afirmando que seria "mais tolerável" para estas no dia do juízo do que para aquelas. O critério é claro: mais milagres e revelação testemunhados implica maior responsabilidade. Este texto por si só demonstra que o juízo não é uniforme, mas proporcional à oportunidade.
+        </div>
+      </div>
+    </div>
+    <div class="acord-item">
+      <div class="acord-header" onclick="toggleAcord(this)">
+        <span>Atos 17:30 — Misericórdia na Ignorância</span>
+        <span class="acord-seta">▾</span>
+      </div>
+      <div class="acord-body">
+        <div class="acord-body-inner">
+          <div class="citacao"><p>Tendo Deus tolerado os tempos da ignorância, agora manda que todos os homens, em todo lugar, se arrependam.</p><span class="citacao-ref">Atos 17:30</span></div>
+          O texto revela que Deus "fez vista grossa" à ignorância passada — reconhecendo que julgamento pleno seria injusto onde a revelação era limitada. Isso confirma que revelação e oportunidade são fatores reais na avaliação divina.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; color:var(--dourado); letter-spacing:0.08em; margin: 2.5rem 0 1rem; text-transform:uppercase;">Textos que Matizam — e Como Conciliar</h3>
+
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Passagem</th>
+          <th>Possível Tensão</th>
+          <th>Conciliação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="font-family:'Cinzel',serif; color:var(--dourado); font-size:1em;">João 3:16–18</strong></td>
+          <td>Salvação pela fé em Cristo como critério universal</td>
+          <td>A fé em Cristo é o caminho; a avaliação leva em conta o grau de revelação disponível para cada um</td>
+        </tr>
+        <tr>
+          <td><strong style="font-family:'Cinzel',serif; color:var(--dourado); font-size:1em;">Hebreus 9:27</strong></td>
+          <td>Juízo após a morte afirmado universalmente</td>
+          <td>Confirma a existência do juízo, mas não especifica critério uniforme — compatível com gradação</td>
+        </tr>
+        <tr>
+          <td><strong style="font-family:'Cinzel',serif; color:var(--dourado); font-size:1em;">Romanos 1:18–20</strong></td>
+          <td>Criação revela Deus; todos "sem desculpa"</td>
+          <td>Afirma responsabilidade básica universal, mas não elimina gradação — todos respondem, mas em medidas diferentes</td>
+        </tr>
+        <tr>
+          <td><strong style="font-family:'Cinzel',serif; color:var(--dourado); font-size:1em;">João 12:47–48</strong></td>
+          <td>Palavras de Cristo como padrão de julgamento</td>
+          <td>O padrão é responder à revelação recebida; quem recebeu as palavras de Cristo é julgado por elas</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:1.5rem;">A tensão entre esses textos não é contradição, mas complementaridade: há um critério objetivo (responder em fé à revelação disponível) e há gradação na responsabilidade (quem recebeu mais será mais exigido).</p>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- SEÇÃO III: MISERICÓRDIA -->
+<section class="section" id="misericordia" data-nav="3">
+  <div class="badge">Seção III</div>
+  <h2 class="section-titulo">Misericórdia Divina e o Caráter de Deus</h2>
+  <div class="section-linha"></div>
+
+  <p>A objeção mais séria a um juízo uniforme — que ignore as desigualdades de revelação — é que ele contradiz o caráter misericordioso de Deus revelado nas Escrituras. Um Deus que julga igualmente o que nunca ouviu e o que deliberadamente rejeitou não é o Deus da Bíblia.</p>
+
+  <div class="citacao">
+    <p>Misericórdia quero, e não sacrifício.</p>
+    <span class="citacao-ref">Mateus 9:13 — Jesus citando Oseias 6:6</span>
+  </div>
+
+  <div class="implicacoes">
+    <div class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Misericórdia é Proporcional aos Graus de Clareza da Revelação</div>
+        <div class="impl-texto">A misericórdia bíblica não é aplicação mecânica de perdão uniforme — é compaixão que considera a clareza da revelação efetivamente disponível a cada pessoa. Cabe aqui uma precisão importante: ninguém recebe revelação <em>zero</em>. O Salmo 19 declara que os céus proclamam a glória de Deus sem palavras e sem fronteiras; Romanos 1:20 afirma que os atributos invisíveis de Deus são claramente vistos desde a criação, "de modo que são indesculpáveis". Portanto, a variação não é entre quem tem luz e quem não tem nenhuma — é entre <em>graus de clareza</em>: da revelação geral da criação até o evangelho explícito de Cristo. O juízo de Deus leva em conta exatamente essa gradação.</div>
+      </div>
+    </div>
+    <div class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Equidade Prática como Exigência da Justiça</div>
+        <div class="impl-texto">Tratar desiguais de forma igual pode ser profundamente injusto. Uma pessoa criada sem acesso ao evangelho, com limitações cognitivas ou sujeita a engano sistemático não está em pé de igualdade com quem recebeu revelação clara e prolongada. Exigir exatamente a mesma resposta seria penalizar vítimas de circunstâncias — o oposto do que a misericórdia faz.</div>
+      </div>
+    </div>
+    <div class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">A Encarnação como Expressão da Misericórdia Proporcional</div>
+        <div class="impl-texto">A encarnação, a cruz e a missão apostólica retratam Deus ativamente alcançando os marginalizados — descendo à vulnerabilidade humana para revelar-se. Isso indica que Deus não exige de antemão uma resposta que Ele mesmo torna difícil ou impossível para muitos. A misericórdia divina pressupõe reconhecimento das limitações humanas.</div>
+      </div>
+    </div>
+    <div class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Conciliar Justiça e Misericórdia Requer Gradação</div>
+        <div class="impl-texto">Para preservar tanto a justiça quanto a misericórdia sem contradição, é mais plausível que Deus julgue proporcionalmente: a justiça trata o pecado adequadamente, enquanto a misericórdia atenua a culpabilidade quando a revelação foi limitada. Um juízo rigidamente uniforme sacrifica a misericórdia ou esvazia seu sentido bíblico.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="destaque-biblico">
+    <p>O juízo será sem misericórdia para quem não usou de misericórdia; mas a misericórdia triunfa sobre o juízo.</p>
+    <span class="ref">Tiago 2:13</span>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- SEÇÃO IV: ANTIGO TESTAMENTO -->
+<section class="section" id="antigo-testamento" data-nav="4">
+  <div class="badge">Seção IV</div>
+  <h2 class="section-titulo">O Antigo Testamento e a Fé Disponível</h2>
+  <div class="section-linha"></div>
+
+  <p>Um caso histórico paradigmático confirma a tese: os santos do Antigo Testamento foram salvos sem conhecimento explícito de Cristo — e a Bíblia afirma que foram salvos pela fé. Isso demonstra que Deus aceita respostas de fé adequadas à revelação disponível em cada época.</p>
+
+  <div class="citacao">
+    <p>E creu Abraão em Deus, e isso lhe foi imputado como justiça.</p>
+    <span class="citacao-ref">Romanos 4:3 — citando Gênesis 15:6</span>
+  </div>
+
+  <div class="passos" id="passosAT">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div>
+        <div class="passo-titulo">Fé no Deus Revelado — não em Cristo explicitado</div>
+        <div class="passo-texto">Abraão, Davi, Moisés e os santos do Antigo Testamento foram justificados por fé no Deus que se revelou a eles — YHWH, conforme as promessas disponíveis. Eles não conheciam o nome "Jesus" nem a teologia trinitária desenvolvida. Deus aceitou sua fé como adequada à revelação que tinham.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div>
+        <div class="passo-titulo">Tipologia e Promessa como Participação Antecipada</div>
+        <div class="passo-texto">O Antigo Testamento aponta para o Messias por meio de promessas, tipos e sacrifícios que prefiguram Cristo. Crer nas promessas divinas era participar antecipadamente do bem que viria em Cristo — mesmo sem compreensão plena do que estava por vir.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div>
+        <div class="passo-titulo">Hebreus 11 — A Galeria da Fé</div>
+        <div class="passo-texto">O capítulo da fé em Hebreus lista homens e mulheres que "morreram na fé, sem ter recebido as promessas, mas as tendo visto e saudado de longe". Foram salvos sem a revelação completa — apenas com o que tinha chegado a eles.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">4</div>
+      <div>
+        <div class="passo-titulo">O Logos Pré-Encarnado — Cristo Antes de Belém</div>
+        <div class="passo-texto">A percepção mais profunda sobre a salvação no AT está em João 1:1-14: o Logos não começou em Belém. "No princípio era o Verbo, e o Verbo estava com Deus." A encarnação foi a <em>tabernaculação</em> de algo que já existia e já agia. João 1:9 declara que o Logos é "a luz verdadeira que ilumina a todo homem" — antes mesmo de vir ao mundo em carne. Paulo confirma em 1 Coríntios 10:4 que os israelitas no deserto "bebiam da rocha espiritual que os seguia, e a rocha era Cristo". Cristo já estava presente e ativo antes de se encarnar.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">5</div>
+      <div>
+        <div class="passo-titulo">As Características de Cristo Já Estavam Reveladas</div>
+        <div class="passo-texto">Quando o NT afirma "ninguém vem ao Pai senão por mim" (João 14:6), essa declaração não exclui os santos do AT — porque eles responderam em fé às mesmas características que se tornaram visíveis em Jesus: a fidelidade, a misericórdia, a santidade e a verdade de Deus. Quem respondeu em fé à luz disponível respondeu, sem saber o nome, ao mesmo a quem nós respondemos sabendo o nome. A encarnação não mudou <em>quem salva</em>; tornou a revelação incomparavelmente mais clara — e, portanto, a responsabilidade de quem a recebe, incomparavelmente maior.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">6</div>
+      <div>
+        <div class="passo-titulo">Implicação Direta para o Juízo</div>
+        <div class="passo-texto">Se Deus aceitou fé adequada à revelação disponível no Antigo Testamento, isso confirma que o critério de julgamento não é uniformidade de conhecimento — é a qualidade da resposta à revelação efetivamente recebida. O mesmo princípio se aplica a todos os que jamais ouviram o evangelho explícito.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tags">
+    <span class="tag" data-tip="Paulo aplica a justificação de Abraão pela fé como modelo universal, anterior à lei de Moisés." onclick="flashTag(this)">Romanos 4</span>
+    <span class="tag" data-tip="Personagens do AT listados como salvos pela fé, sem ter recebido as promessas cumpridas." onclick="flashTag(this)">Hebreus 11</span>
+    <span class="tag" data-tip="A lei é pedagogo que aponta para Cristo; antes de Cristo, havia outra forma de acesso a Deus." onclick="flashTag(this)">Gálatas 3</span>
+    <span class="tag" data-tip="Abraão creu em Deus — fé como critério, não conhecimento explícito de Cristo." onclick="flashTag(this)">Gênesis 15:6</span>
+    <span class="tag" data-tip="O Logos que se encarnou já existia no princípio e iluminava a todo homem antes da encarnação." onclick="flashTag(this)">João 1:1-14</span>
+    <span class="tag" data-tip="Os israelitas bebiam da rocha espiritual — e a rocha era Cristo. Cristo ativo antes de Belém." onclick="flashTag(this)">1 Coríntios 10:4</span>
+    <span class="tag" data-tip="Deus revela progressivamente — há economia de revelação ao longo da história." onclick="flashTag(this)">Revelação Progressiva</span>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- SEÇÃO V: REVELAÇÃO E HERMENÊUTICA -->
+<section class="section" id="revelacao" data-nav="5">
+  <div class="badge">Seção V</div>
+  <h2 class="section-titulo">Revelação, Hermenêutica e Humildade</h2>
+  <div class="section-linha"></div>
+
+  <p>Alguns poderiam objetar que hoje possuímos revelação completa e plena compreensão das profecias messiânicas — o que tornaria a situação de todos mais uniforme. Essa objeção merece ser tratada com seriedade, pois toca em questões fundamentais de epistemologia teológica.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icone">📜</div>
+      <div class="card-titulo">Revelação Completa ≠ Compreensão Final</div>
+      <div class="card-texto">Muitos cristãos afirmam que a revelação pública normativa está completa em Cristo e nas Escrituras — o que é razoável. Mas isso não implica que nossa compreensão humana das profecias seja incontestável. Escritura completa não equivale a interpretação perfeita e encerrada.</div>
+    </div>
+    <div class="card">
+      <div class="card-icone">🔍</div>
+      <div class="card-titulo">Limites Hermenêuticos Reais</div>
+      <div class="card-texto">Linguagem, contexto histórico, gêneros literários, traduções e pressupostos teológicos influenciam toda interpretação. Textos apocalípticos como Daniel, Zacarias e Apocalipse geraram múltiplas leituras ao longo dos séculos — sem unanimidade histórica que garanta "compreensão final".</div>
+    </div>
+    <div class="card">
+      <div class="card-icone">🕊️</div>
+      <div class="card-titulo">Mistério Escatológico Intencional</div>
+      <div class="card-texto">A Bíblia preserva deliberadamente certos mistérios sobre eventos futuros. Jesus mesmo disse que nem os anjos sabem o dia e a hora. Deus pode ter retardado ou ocultado certos detalhes — afirmar compreensão plena pode subestimar a intenção bíblica de manter o mistério.</div>
+    </div>
+    <div class="card">
+      <div class="card-icone">🤝</div>
+      <div class="card-titulo">Chamado à Fidelidade, não à Sistematização</div>
+      <div class="card-texto">A Escritura enfatiza respostas de fé, arrependimento, santidade e missão diante da revelação que temos. Mesmo com melhor entendimento, a exigência pastoral permanece: viver na fidelidade enquanto interpretamos com humildade, sem transformar incertezas em dogmas.</div>
+    </div>
+  </div>
+
+  <div class="destaque-biblico">
+    <p>Porque agora vemos por espelho em enigma, mas então veremos face a face; agora conheço em parte, mas então conhecerei como também sou conhecido.</p>
+    <span class="ref">1 Coríntios 13:12</span>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- SEÇÃO VI: EQUIDADE -->
+<section class="section" id="equidade" data-nav="6">
+  <div class="badge">Seção VI</div>
+  <h2 class="section-titulo">A Equidade de Deus — O Argumento da Justiça Real</h2>
+  <div class="section-linha"></div>
+
+  <p>Se a criatura finita e falha é capaz de reconhecer que justiça real exige tratar desiguais desigualmente, quanto mais o Deus infinito e perfeito aplica esse princípio com sabedoria absoluta. Este é um argumento <em>a fortiori</em> — do menor para o maior — e tem respaldo direto nas Escrituras.</p>
+
+  <div class="destaque-biblico">
+    <p>Se vós, sendo maus, sabeis dar boas dádivas aos vossos filhos, quanto mais vosso Pai celestial dará boas coisas aos que lhe pedirem.</p>
+    <span class="ref">Mateus 7:11</span>
+  </div>
+
+  <p>O mesmo raciocínio de Jesus se aplica à justiça: se humanos imperfeitos chegaram à compreensão de que justiça proporcional é mais justa do que uniformidade rígida, Deus a pratica em nível infinitamente superior. Três vozes da história da filosofia e do direito convergem nesse princípio:</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icone">🏛️</div>
+      <div class="card-titulo">Aristóteles</div>
+      <div class="card-texto">"Devemos tratar igualmente os iguais e desigualmente os desiguais, na medida de sua desigualdade." Este é o princípio clássico da equidade — base de toda a tradição ocidental de justiça. Criaturas com acesso radicalmente diferente à revelação de Deus não são iguais diante do juízo, e tratá-las como tal seria injustiça, não justiça.</div>
+    </div>
+    <div class="card">
+      <div class="card-icone">⚖️</div>
+      <div class="card-titulo">Ulpiano</div>
+      <div class="card-texto">"A justiça é a vontade constante e perpétua de dar a cada um o seu direito." O jurisconsulto romano que fundamentou o Princípio da Isonomia afirma que a verdadeira igualdade considera as necessidades e capacidades de cada um. Dar a cada um o que é seu — no juízo divino — significa avaliar segundo a luz e a oportunidade que cada um efetivamente teve.</div>
+    </div>
+    <div class="card">
+      <div class="card-icone">🇧🇷</div>
+      <div class="card-titulo">Rui Barbosa</div>
+      <div class="card-texto">"Tratar com desigualdade a iguais, ou a desiguais com igualdade, seria desigualdade flagrante, e não igualdade real." A frase mais célebre do jurista brasileiro sintetiza com precisão o que está em jogo: aplicar ao índio primitivo o mesmo critério do cidadão urbano evangelizado não é equidade — é injustiça disfarçada de uniformidade.</div>
+    </div>
+  </div>
+
+  <div class="citacao">
+    <p>Porventura é injusto o caminho do Senhor? Sois vós, ó casa de Israel, cujos caminhos são injustos.</p>
+    <span class="citacao-ref">Ezequiel 18:29</span>
+  </div>
+
+  <p>A objeção de que Deus seria injusto ao julgar proporcionalmente inverte a lógica: é o juízo <em>uniforme</em> que seria injusto. O Deus que a Bíblia revela é aquele cuja justiça excede em perfeição tudo o que a razão humana pôde formular. Se Aristóteles, Ulpiano e Rui Barbosa chegaram a esse princípio com razão finita, Deus o aplica com sabedoria infinita — conhecendo cada consciência, cada circunstância e cada grau de clareza da revelação recebida por cada pessoa que já viveu.</p>
+
+  <div class="implicacoes">
+    <div class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Ninguém Tem Revelação Zero</div>
+        <div class="impl-texto">O Salmo 19 e Romanos 1:20 garantem que ninguém parte do zero: a criação inteira proclama Deus, e seus atributos eternos são claramente vistos, tornando todos indesculpáveis em algum grau básico. A equidade divina não absolve a ninguém arbitrariamente — avalia a resposta à luz que cada um efetivamente recebeu, seja ela a revelação geral da criação ou o evangelho explícito de Cristo.</div>
+      </div>
+    </div>
+    <div class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">O Argumento Fortalece, Não Relativiza</div>
+        <div class="impl-texto">Reconhecer gradação no juízo não enfraquece a seriedade do pecado nem elimina a necessidade de resposta a Deus. Ao contrário: confirma que Deus leva cada vida absolutamente a sério, avaliando com precisão perfeita o que cada pessoa fez com a luz que recebeu. Isso é mais exigente, não menos.</div>
+      </div>
+    </div>
+    <div class="implicacao">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Urgência Missionária Reforçada</div>
+        <div class="impl-texto">Se maior revelação implica maior responsabilidade, levar o evangelho é ao mesmo tempo o maior presente e o maior aumento de responsabilidade que se pode oferecer a alguém. A missão cristã não é opcional — é o ato de ampliar a clareza da revelação disponível, sabendo que Deus julgará proporcionalmente a ela.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- SEÇÃO VII: CONCLUSÃO -->
+<section class="section" id="conclusao" data-nav="7">
+  <div class="badge">Seção VII · Conclusão</div>
+  <h2 class="section-titulo">A Tese Reafirmada</h2>
+  <div class="section-linha"></div>
+
+  <p>Após examinar as Escrituras, considerar o caráter de Deus e analisar as implicações teológicas, a tese se sustenta com solidez: no dia do juízo, seremos avaliados segundo a luz que recebemos e a resposta de fé ou rejeição que demos a essa luz.</p>
+
+  <div class="citacao">
+    <p>Não há como tratar igualmente um índio primitivo que jamais ouviu o evangelho e um cidadão urbano que deliberadamente o rejeitou.</p>
+    <span class="citacao-ref">Síntese da Tese</span>
+  </div>
+
+  <div class="passos" id="passosConclusao">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div>
+        <div class="passo-titulo">Base Bíblica Sólida</div>
+        <div class="passo-texto">Lucas 12:48, Romanos 2:12–16, João 15:22–24, Mateus 11:20–24 e Atos 17:30 estabelecem consistentemente que culpabilidade e retribuição são proporcionais à luz recebida e à resposta dada.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div>
+        <div class="passo-titulo">Coerência com o Caráter de Deus</div>
+        <div class="passo-texto">Avaliar segundo a oportunidade preserva simultaneamente a justiça (o pecado é tratado adequadamente) e a misericórdia (ignorância, limitações culturais e circunstâncias são consideradas). Esse equilíbrio é o retrato bíblico de Deus.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div>
+        <div class="passo-titulo">Confirmação pelo Antigo Testamento</div>
+        <div class="passo-texto">Os santos do AT foram salvos pela fé adequada à revelação disponível — sem conhecimento explícito de Cristo. Isso confirma que o critério é a qualidade da resposta à revelação recebida, não a uniformidade de conhecimento teológico.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">4</div>
+      <div>
+        <div class="passo-titulo">Implicação Pastoral: Missão com Urgência e Compaixão</div>
+        <div class="passo-texto">Esta tese não relaxa a urgência missionária — ao contrário, intensifica-a. Levar o evangelho é ampliar a oportunidade de conhecer a Deus com clareza. Ao mesmo tempo, nos convoca à compaixão: não julguemos precipitadamente aqueles que não tiveram nossa oportunidade.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">5</div>
+      <div>
+        <div class="passo-titulo">Deus Julga com Perfeita Sabedoria</div>
+        <div class="passo-texto">O que é impossível para nós — avaliar consciências, circunstâncias e revelações disponíveis com perfeita precisão — é plenamente possível para Deus. Ele conhece cada coração e cada oportunidade com infinita sabedoria. Podemos confiar que seu juízo será perfeitamente justo e misericordioso.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="destaque-biblico">
+    <p>Então cada um receberá de Deus os louvores que merecer.</p>
+    <span class="ref">1 Coríntios 4:5</span>
+  </div>
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+  <div class="footer-simbolo">✦</div>
+  <div class="footer-nome">Pr. João Alves</div>
+  <div class="footer-local">Vila Velha · Espírito Santo</div>
+  <div class="footer-site"><a href="https://www.radiomateus633.com" target="_blank">www.radiomateus633.com</a></div>
+  <p class="footer-nota"><em>Porque o Senhor é justo, e ama a justiça; os retos contemplarão a sua face. — Salmo 11:7</em></p>
+</footer>
+
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">↑</button>
+
+<script>
+function irPara(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const navH = document.getElementById('mainNav').offsetHeight;
+  const top = el.getBoundingClientRect().top + window.scrollY - navH - 16;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+function toggleAcord(header) {
+  const item = header.parentElement;
+  const body = item.querySelector('.acord-body');
+  const isOpen = item.classList.contains('aberto');
+  document.querySelectorAll('.acord-item.aberto').forEach(i => {
+    i.classList.remove('aberto');
+    i.querySelector('.acord-body').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('aberto');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+}
+
+function flashTag(el) {
+  el.classList.add('flash');
+  setTimeout(() => el.classList.remove('flash'), 600);
+}
+
+// Tooltip
+const tooltip = document.getElementById('tooltip');
+document.querySelectorAll('.tag[data-tip]').forEach(tag => {
+  tag.addEventListener('mouseenter', e => {
+    tooltip.textContent = tag.dataset.tip;
+    tooltip.classList.add('visivel');
+    posTooltip(e);
+  });
+  tag.addEventListener('mousemove', posTooltip);
+  tag.addEventListener('mouseleave', () => tooltip.classList.remove('visivel'));
+});
+function posTooltip(e) {
+  let x = e.clientX + 14, y = e.clientY - 40;
+  if (x + 270 > window.innerWidth) x = e.clientX - 270;
+  if (y < 10) y = e.clientY + 20;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top = y + 'px';
+}
+
+// Scroll events
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('backTop').classList.toggle('visivel', window.scrollY > 400);
+});
+
+// IntersectionObserver
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visivel');
+      const nav = entry.target.dataset.nav;
+      if (nav !== undefined) {
+        document.querySelectorAll('.nav-btn[data-nav]').forEach(b => b.classList.remove('ativo'));
+        const active = document.querySelector(`.nav-btn[data-nav="${nav}"]`);
+        if (active) active.classList.add('ativo');
+      }
+      // Animate steps
+      entry.target.querySelectorAll('.passo').forEach((passo, i) => {
+        setTimeout(() => passo.classList.add('visivel'), i * 140);
+      });
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
